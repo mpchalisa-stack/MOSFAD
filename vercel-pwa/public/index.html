@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>MOSFAD: Mobile Security and Forensic Analyzer Diskomlekau</title>
+  <meta name="description" content="Pusat komando keamanan mobile taktis dan penganalisis forensik AI Diskomlekau." />
+  <meta name="theme-color" content="#0B1014" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="MOSFAD Diskomlekau" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-brand">
+      <img src="/icons/icon-192.png" alt="Logo Diskomlekau MOSFAD" class="brand-badge" />
+      <div class="brand-text">
+        <h1>MOSFAD: Mobile Security and Forensic Analyzer Diskomlekau</h1>
+        <span class="brand-sub">TACTICAL COMMAND &amp; LIVE GEMINI FORENSIC ANALYZER</span>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button id="installPwaBtn" class="btn-install hidden" type="button">INSTALL PWA</button>
+      <button id="tacticalLinkBtn" class="link-pill active" type="button">
+        <span class="pulse-dot"></span>
+        <span id="tacticalLinkLabel">TACTICAL LINK: ACTIVE</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="dashboard">
+    <section class="kpi-grid" aria-label="Ringkasan KPI Taktis">
+      <article class="kpi-card">
+        <div class="kpi-head"><span class="tag">RUGGED</span><span class="slash cyan">//</span></div>
+        <div class="kpi-title">TOTAL DEVICES</div>
+        <div id="kpiTotal" class="kpi-val cyan">7</div>
+        <div class="kpi-sub">DEPLOYED • RUGGED</div>
+      </article>
+      <article class="kpi-card">
+        <div class="kpi-head"><span class="tag">RUGGED</span><span class="slash green">//</span></div>
+        <div class="kpi-title">SYSTEM STATUS</div>
+        <div id="kpiStatus" class="kpi-val green">SECURE</div>
+        <div id="kpiStatusSub" class="kpi-sub green">OPERATIONAL</div>
+      </article>
+      <article class="kpi-card">
+        <div class="kpi-head"><span class="tag">RUGGED</span><span class="slash amber">//</span></div>
+        <div class="kpi-title">ANOMALY ALERTS</div>
+        <div id="kpiWatch" class="kpi-val amber">0</div>
+        <div class="kpi-sub amber">WARNING</div>
+      </article>
+      <article class="kpi-card">
+        <div class="kpi-head"><span class="tag">RUGGED</span><span class="slash red">//</span></div>
+        <div class="kpi-title">CRITICAL THREATS</div>
+        <div id="kpiCritical" class="kpi-val red">0</div>
+        <div id="kpiCriticalSub" class="kpi-sub red">IMMEDIATE ACTION REQUIRED</div>
+      </article>
+    </section>
+
+    <section class="command-layout">
+      <!-- PANEL KIRI -->
+      <aside class="col-left">
+        <div class="panel">
+          <div class="panel-header"><span class="bar green"></span><h2>CLIENT ENROLLMENT</h2></div>
+          <div class="panel-body">
+            <p class="muted">MDM management profile installation</p>
+            <div class="btn-row">
+              <button id="downloadJsonBtn" class="btn-tactical green" type="button">DOWNLOAD .JSON</button>
+              <button id="downloadMobileConfigBtn" class="btn-tactical cyan" type="button">.MOBILECONFIG</button>
+            </div>
+            <div class="qr-head">
+              <span>ZERO-TOUCH QR TOKEN</span>
+              <span class="tag-live">AES-256</span>
+            </div>
+            <canvas id="qrCanvas" width="180" height="180" aria-label="QR Code Enrollment Diskomlekau"></canvas>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><span class="bar cyan"></span><h2>ZERO-TOUCH / AUTOMATIC</h2></div>
+          <div class="panel-body">
+            <label class="toggle-row">
+              <span>ENROLLMENT</span>
+              <input id="toggleEnrollment" type="checkbox" checked />
+            </label>
+            <p class="caption">AUTOMATIC ENROLLMENT TO GRANT SYSTEM MANAGEMENT PERMISSIONS</p>
+            <label class="toggle-row">
+              <span>ALLOW DEVICE MGMT</span>
+              <input id="toggleMgmt" type="checkbox" checked />
+            </label>
+            <label class="toggle-row">
+              <span>AUTOMATIC JOIN</span>
+              <input id="toggleAutoJoin" type="checkbox" checked />
+            </label>
+            <button id="openEnrollBtn" class="btn-tactical outline full" type="button">+ ENROLL NEW CLIENT</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- PANEL TENGAH -->
+      <section class="col-center">
+        <div class="panel">
+          <div class="panel-header">
+            <span class="bar cyan"></span>
+            <h2>DEVICE COMMAND CENTER</h2>
+            <span id="deviceCountBadge" class="header-meta">7 UNIT</span>
+          </div>
+          <div class="panel-body">
+            <div class="table-wrap">
+              <table class="device-table">
+                <thead>
+                  <tr>
+                    <th>CALLSIGN</th>
+                    <th>MODEL</th>
+                    <th>LAST SYNC</th>
+                    <th>BACKGROUND DATA (MB)</th>
+                    <th>RISK LEVEL</th>
+                  </tr>
+                </thead>
+                <tbody id="deviceTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <span class="bar green"></span>
+            <h2>AI FORENSIC REPORT (INDONESIAN)</h2>
+            <span class="header-meta">POST /api/analyze • gemini-2.5-flash</span>
+          </div>
+          <div class="panel-body">
+            <div class="selected-banner">
+              <div>
+                <strong id="reportCallsign">-</strong>
+                <span id="reportMeta" class="muted">Pilih perangkat di atas</span>
+              </div>
+              <span id="reportThreatScore" class="score-pill">SKOR: -</span>
+            </div>
+
+            <label class="log-label" for="rawLogInput">LOG TELEMETRI / LOGCAT PERANGKAT (UNTUK ANALISIS GEMINI BACKEND):</label>
+            <textarea id="rawLogInput" rows="4" placeholder="Tempel atau sesuaikan log telemetri perangkat untuk dianalisis via /api/analyze..."></textarea>
+
+            <div class="action-bar">
+              <button id="analyzeBackendBtn" class="btn-tactical cyan" type="button">ANALISIS LOG VIA /api/analyze</button>
+              <button id="isolateBtn" class="btn-tactical red" type="button">ISOLASI PERANGKAT / KIRIM IRT</button>
+            </div>
+
+            <div id="forensicStatusMsg" class="status-banner hidden"></div>
+
+            <div id="forensicReportContent" class="forensic-grid">
+              <div class="forensic-box">
+                <div class="forensic-label">DETEKSI PENYADAPAN &amp; BACKDOOR</div>
+                <p id="repWiretap">Klik "ANALISIS LOG VIA /api/analyze" untuk menjalankan inspeksi AI real-time.</p>
+              </div>
+              <div class="forensic-box">
+                <div class="forensic-label">ANOMALI TRAFIK &amp; TRANSAKSI OTP</div>
+                <p id="repTraffic">-</p>
+              </div>
+              <div class="forensic-box">
+                <div class="forensic-label">FILTER PRIVASI</div>
+                <p id="repPrivacy">-</p>
+              </div>
+              <div class="forensic-box highlight">
+                <div class="forensic-label">REKOMENDASI TINDAKAN IRT DISKOMLEKAU</div>
+                <p id="repIrt">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANEL KANAN -->
+      <aside class="col-right">
+        <div class="panel full-height">
+          <div class="panel-header">
+            <span class="bar red"></span>
+            <h2>CRITICAL ALERT FEED</h2>
+            <span id="alertCountBadge" class="header-meta">0 LOG</span>
+          </div>
+          <div class="panel-body">
+            <p class="muted feed-note">Log peringatan berasal langsung dari hasil analisis <code>/api/analyze</code> dan aksi IRT.</p>
+            <div id="alertFeedList" class="alert-list"></div>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <dialog id="enrollDialog" class="tactical-dialog">
+    <form id="enrollForm" method="dialog">
+      <h3>ENROLL PERANGKAT TAKTIS BARU</h3>
+      <label>Callsign Unit
+        <input id="newCallsign" required placeholder="FALCON-08" />
+      </label>
+      <label>Model Perangkat Rugged
+        <input id="newModel" required placeholder="XCover7 Tactical" />
+      </label>
+      <label>Unit / Kesatuan
+        <input id="newUnit" value="DISKOMLEKAU-OPS" />
+      </label>
+      <div class="dialog-actions">
+        <button id="cancelEnrollBtn" type="button" class="btn-tactical outline">BATAL</button>
+        <button type="submit" class="btn-tactical green">ENROLL</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch((err) => {
+          console.error("SW registration failed:", err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

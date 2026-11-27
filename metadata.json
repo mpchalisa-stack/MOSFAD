@@ -1,0 +1,6 @@
+{
+  "name": "MOSFAD Diskomlekau",
+  "description": "MOSFAD: Mobile Security and Forensic Analyzer Diskomlekau — Tactical mobile device security command center and Indonesian AI forensic analyzer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

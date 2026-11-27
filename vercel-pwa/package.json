@@ -1,0 +1,10 @@
+{
+  "name": "mosfad-diskomlekau-pwa",
+  "version": "1.0.0",
+  "description": "MOSFAD: Mobile Security and Forensic Analyzer Diskomlekau — Standalone Tactical PWA for Vercel",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@google/genai": "^1.0.0"
+  }
+}
